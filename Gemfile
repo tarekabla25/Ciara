@@ -8,7 +8,7 @@ gem "propshaft"
 gem "sqlite3", ">= 2.1"
 
 # TA/SD: Wir verwenden MariaDB 11.7
-
+gem 'mysql2', '0.5.6'   #Edit C:\Ruby33-x64\msys64\ucrt64\include\mysql\mariadb_version.h change to #define MARIADB_CLIENT_VERSION_STR	"3.4.3"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -58,6 +58,14 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "ruby-lsp"
+  gem "rubocop"
+  gem "rubocop-packaging"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
+  gem "rubocop-shopify"
+  gem "rubocop-thread_safety"
+  gem "solargraph"
 
 end
 
