@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_123853) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_28_085443) do
+  create_table "cards", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.string "brand", limit: 50
+    t.string "model", limit: 30
+    t.integer "performance", limit: 3
+    t.integer "seats", limit: 2
+    t.decimal "consume", precision: 10
+    t.integer "speed", limit: 3
+    t.decimal "acceleration", precision: 10
+    t.decimal "price", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "players", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "name", limit: 32
     t.integer "number", limit: 1
