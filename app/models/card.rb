@@ -1,9 +1,12 @@
 class Card < ApplicationRecord
 
+  belongs_to :player
   validates :brand, :model, presence: true
   validates :model, uniqueness: { scope: [:brand] }
   validates :seats, :speed, :acceleration, numericality: { only_integer: true, greater_than: 0 }
   validates :performance, :consume, :price, numericality: { greater_than: 0 }
+
+
 
 
 

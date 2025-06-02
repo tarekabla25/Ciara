@@ -1,6 +1,8 @@
 class Player < ApplicationRecord
 
+  has_many :cards
   validates :name, :number, presence: true
+
 
 
   # attr_reader :cards

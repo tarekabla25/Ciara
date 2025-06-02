@@ -10,18 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_28_085443) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_02_092822) do
   create_table "cards", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "brand", limit: 50
     t.string "model", limit: 30
     t.integer "performance", limit: 3
     t.integer "seats", limit: 2
-    t.decimal "consume", precision: 10
+    t.float "consume"
     t.integer "speed", limit: 3
-    t.decimal "acceleration", precision: 10
-    t.decimal "price", precision: 10
+    t.float "acceleration"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "player_id", null: false
+    t.index ["player_id"], name: "index_cards_on_player_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "players", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
@@ -31,4 +35,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_085443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "cards", "players"
 end
