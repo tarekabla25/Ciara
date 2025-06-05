@@ -10,31 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_02_092822) do
-  create_table "cards", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
-    t.string "brand", limit: 50
-    t.string "model", limit: 30
-    t.integer "performance", limit: 3
-    t.integer "seats", limit: 2
+ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
+  create_table "cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "game_id"
+    t.string "brand"
+    t.string "model"
+    t.integer "performance"
+    t.integer "seats"
     t.float "consume"
-    t.integer "speed", limit: 3
+    t.integer "speed"
     t.float "acceleration"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.bigint "player_id", null: false
-    t.index ["player_id"], name: "index_cards_on_player_id"
-    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
-  create_table "players", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+  create_table "games", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "image_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "match_cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "match_id"
+    t.integer "round_id"
+    t.integer "match_player_id"
+    t.integer "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "match_players", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "match_id"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "players", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 32
-    t.integer "number", limit: 1
     t.boolean "human"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "cards", "players"
+  create_table "rounds", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "number"
+    t.integer "winner_id"
+    t.integer "current_player_id"
+    t.integer "game_id"
+    t.string "attribute"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end

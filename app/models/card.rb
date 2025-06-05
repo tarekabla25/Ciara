@@ -1,52 +1,33 @@
 class Card < ApplicationRecord
 
-  belongs_to :player
+  COMPARE_ATTRS = [:performance, :seats, :consume, :speed, :acceleration, :price]
+  ATTRS = {
+      brand: {name: 'Marke'},
+      model: {name: 'Modell'},
+      performance: {name: 'Leistung (ps)', compare: :max},
+      seats: {name: 'Anzahl Sitze', compare: :max},
+      consume: {name: 'Benzinverbrauch', compare: :min},
+      speed: {name: 'Endgeschwindigkeit', compare: :max},
+      acceleration: {name: 'Beschleunigung', compare: :min},
+      price: {name: 'Preis', compare: :min},
+  }
+
+  belongs_to :game
+  has_many :match_cards
+
   validates :brand, :model, presence: true
   validates :model, uniqueness: { scope: [:brand] }
   validates :seats, :speed, :acceleration, numericality: { only_integer: true, greater_than: 0 }
   validates :performance, :consume, :price, numericality: { greater_than: 0 }
 
+  
+  def self.compare(cards, attr)
+    cards.shuffle.send("#{ATTRS[attr][:compare]}_by") { |card| card.send(attr) }
+  end
 
 
 
-
-
-
-
-
-  # ATTRS = {
-  #     brand: {name: 'Marke', tc: :to_s},
-  #     model: {name: 'Modell', tc: :to_s},
-  #     performance: {name: 'Leistung (ps)', tc: :to_i, compare: :max},
-  #     seats: {name: 'Anzahl Sitze', tc: :to_i, compare: :max},
-  #     consume: {name: 'Benzinverbrauch', tc: :to_f, compare: :min},
-  #     speed: {name: 'Endgeschwindigkeit', tc: :to_i, compare: :max},
-  #     acceleration: {name: 'Beschleunigung', tc: :to_f, compare: :min},
-  #     price: {name: 'Preis', tc: :to_f, compare: :min},
-  # }
-
-  # COMPARE_ATTRS = [:performance, :seats, :consume, :speed, :acceleration, :price]
-
-  # attr_accessor *ATTRS.keys
-
-
-  # def self.compare(cards, attr)
-  #   cards.shuffle.send("#{ATTRS[attr][:compare]}_by") { |card| card.send(attr) }
-  # end
-
-  # def initialize(values = [])
-  #   ATTRS.keys.each_with_index do |attr, index|
-  #     send("#{attr}=", values[index].send(ATTRS[attr][:tc]))
-  #   end
-  # end
-
-  # def valid?
-  #   return false if brand.empty?
-  #   return false if model.empty?
-
-  #   COMPARE_ATTRS.all? { |key| send(key).nonzero? }
-  # end
-
+  # todo: to_html!
   # def output
   #   <<-CARD
   #     ###########################
