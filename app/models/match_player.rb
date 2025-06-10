@@ -1,14 +1,25 @@
 class MatchPlayer < ApplicationRecord
-  
+
+    #todo top_card
   belongs_to :player
   belongs_to :match
 
-  has_many :match_cards
+  has_many :start_cards
+  has_many :first_hand, through: :start_cards, source: :card
+
+  has_many :hand_cards
+  has_many :cards, through: :hand_cards
+
+  has_many :played_cards
+  has_many :stakes, through: :played_cards, source: :card
+
+  has_many :as_winner_rounds, class_name: 'Round', foreign_key: :winner_id
+  has_many :as_current_rounds, class_name: 'Round', foreign_key: :current_player_id
+
+  validates :number, presence: true
 
 
-
-    # attr_reader :cards
-  #   @cards = []
+  #has_and_belongs_to_many :cards, through: :card  #?????
 
   # def merge!
   #   cards.shuffle!

@@ -13,12 +13,15 @@ class Card < ApplicationRecord
   }
 
   belongs_to :game
-  has_many :match_cards
+
+  has_many :played_cards
+  has_many :start_cards
+  has_many :hand_cards
 
   validates :brand, :model, presence: true
   validates :model, uniqueness: { scope: [:brand] }
-  validates :seats, :speed, :acceleration, numericality: { only_integer: true, greater_than: 0 }
-  validates :performance, :consume, :price, numericality: { greater_than: 0 }
+  validates :seats, :speed, :acceleration, :performance, numericality: { only_integer: true, greater_than: 0 }  #acceleration was a float in the migration
+  validates :consume, :price, numericality: { greater_than: 0 }
 
   
   def self.compare(cards, attr)

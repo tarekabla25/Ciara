@@ -1,0 +1,24 @@
+<div id="players_index">
+
+  <div>
+
+    <% Player.all.each do |player| %>
+      <div>
+        <%= player.name %> 
+      </div>
+    <% end %>
+
+    
+  </div>
+
+  <div>
+     <%# link to add_user %>
+
+<a href = "/players/new">Neuen Spieler anlegen</a>
+
+    
+  </div>
+
+</div>
+
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_05_133610) do
   create_table "cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "game_id"
     t.string "brand"
@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
     t.integer "seats"
     t.float "consume"
     t.integer "speed"
-    t.float "acceleration"
+    t.integer "acceleration"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,11 +33,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "match_cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "match_id"
-    t.integer "round_id"
-    t.integer "match_player_id"
-    t.integer "card_id"
+  create_table "hand_cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,9 +52,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "played_cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "match_player_id"
+    t.integer "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "players", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 32
     t.boolean "human"
+    t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,7 +73,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_094711) do
     t.integer "winner_id"
     t.integer "current_player_id"
     t.integer "game_id"
-    t.string "attribute"
+    t.string "selected_attribute"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "start_cards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

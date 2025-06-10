@@ -8,7 +8,7 @@ class CreateCards < ActiveRecord::Migration[8.0]
       t.integer :seats
       t.float :consume
       t.integer :speed
-      t.float :acceleration
+      t.integer :acceleration  #must be an Integer (was float)
       t.float :price
 
       t.timestamps

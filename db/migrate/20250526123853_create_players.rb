@@ -4,6 +4,7 @@ class CreatePlayers < ActiveRecord::Migration[8.0]
       t.string :name,  limit: 32
       t.boolean :human
       t.string :avatar
+      #t.integer :number  ???
 
       t.timestamps
     end

@@ -1,0 +1,13 @@
+
+<p>Wie soll der neue Spieler heißen?</p>
+<%= form_for @player, url: '/players/create' do |form| %>
+<%=     form.label(:name) %>
+<%=     form.text_field(:name, placeholder: 'Name') %>
+<%=     form.submit('Speichern') %>
+<% end %>
+
+
+
+
+<%# Hausaufgabe: Checkbox ins Formular integrieren, Auswahl Mensch oder Computer
+Im Standard ist die Checkbox an, das bedeutet Mensch! %>
